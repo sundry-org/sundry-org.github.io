@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.example.sundry",
+      "package_name": "com.sundry.sundry",
       "sha256_cert_fingerprints": [
         "55:6C:6E:7D:3A:49:7D:AB:03:60:C1:3D:5D:BA:F3:1F:D8:23:D8:A2:EE:8E:59:84:E6:04:24:D0:96:12:21:D5"
       ]
