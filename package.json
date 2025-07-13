@@ -11,5 +11,10 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "express": "^5.1.0"
-  }
+  },
+  "main": "app.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

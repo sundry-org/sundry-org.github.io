@@ -1,68 +1,44 @@
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
 const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files (like .html, .css, etc.) from current directory
+// Serve all static files in the root directory (except handled routes)
 app.use(express.static(__dirname));
 
-// Create raw HTTP server that delegates to Express for unmatched routes
-const server = http.createServer((req, res) => {
-  if (req.url === "/") {
-    const filePath = path.join(__dirname, "index.html");
-    fs.readFile(filePath, "utf8", (err, data) => {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error loading index.html");
-      } else {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(data);
-      }
-    });
-  } else if (req.url === "/.well-known/apple-app-site-association") {
-    const filePath = path.join(
-      __dirname,
-      ".well-known",
-      "apple-app-site-association"
-    );
-    fs.readFile(filePath, "utf8", (err, data) => {
-      if (err) {
-        res.writeHead(404, { "Content-Type": "text/plain" });
-        res.end("404 Not Found");
-      } else {
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(data);
-      }
-    });
-  } else if (req.url.startsWith("/assets/")) {
-    const filePath = path.join(__dirname, req.url);
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        res.writeHead(404, { "Content-Type": "text/plain" });
-        res.end("404 Not Found");
-      } else {
-        const ext = path.extname(filePath).toLowerCase();
-        const mimeTypes = {
-          ".jpg": "image/jpeg",
-          ".jpeg": "image/jpeg",
-          ".png": "image/png",
-          ".gif": "image/gif",
-        };
-        res.writeHead(200, {
-          "Content-Type": mimeTypes[ext] || "application/octet-stream",
-        });
-        res.end(data);
-      }
-    });
-  } else {
-    // Let Express try to serve the file (like privacy-policy.html)
-    app(req, res);
-  }
+// Serve /assets folder statically
+app.use("/assets", express.static(path.join(__dirname, "assets")));
+
+// Serve apple-app-site-association with proper content type
+app.get("/.well-known/apple-app-site-association", (req, res) => {
+  const filePath = path.join(__dirname, ".well-known", "apple-app-site-association");
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      console.error("AASA file error:", err);
+      return res.status(404).type("text/plain").send("404 Not Found");
+    }
+    res
+      .status(200)
+      .type("application/json")
+      .set("Cache-Control", "no-cache")
+      .send(data);
+  });
 });
 
-server.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+// Serve index.html at root
+app.get("/", (req, res) => {
+  const filePath = path.join(__dirname, "index.html");
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).type("text/plain").send("Error loading index.html");
+    }
+    res.status(200).type("text/html").send(data);
+  });
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`✅ Server running at http://localhost:${port}/`);
 });

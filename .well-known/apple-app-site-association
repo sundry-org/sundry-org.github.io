@@ -3,23 +3,12 @@
     "apps": [],
     "details": [
       {
-        "appIDs": [
-          "MM85XQEN44.com.sundry.sundry"
-        ],
-        "paths": [
-          "*"
-        ],
-        "components": [
-          {
-            "/": "/*"
-          }
-        ]
+        "appID": "MM85XQEN44.com.sundry.sundry",
+        "paths": [ "*" ]
       }
     ]
   },
   "webcredentials": {
-    "apps": [
-      "MM85XQEN44.com.sundry.sundry"
-    ]
+    "apps": [ "MM85XQEN44.com.sundry.sundry" ]
   }
 }
