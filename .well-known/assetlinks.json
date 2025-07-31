@@ -5,7 +5,9 @@
       "namespace": "android_app",
       "package_name": "com.sundry.sundry",
       "sha256_cert_fingerprints": [
-        "55:6C:6E:7D:3A:49:7D:AB:03:60:C1:3D:5D:BA:F3:1F:D8:23:D8:A2:EE:8E:59:84:E6:04:24:D0:96:12:21:D5"
+        "a0:4a:4b:21:46:eb:ed:7d:35:9e:84:7e:c7:2a:c6:7e:62:75:98:7e:27:0c:b7:af:18:e9:72:55:01:97:af:40",
+        "f9:9c:84:c8:6d:33:57:7f:66:0c:5a:e2:50:da:6e:03:b3:50:1a:24:ee:a2:6e:a0:ea:c8:bd:59:33:de:6c:75",
+        "23:D8:4D:64:EC:BE:F0:EC:97:44:09:97:AA:1E:9B:6A:B0:39:38:2F:0E:54:25:70:E6:5B:78:9E:D7:D5:E8:83"
       ]
     }
   }
