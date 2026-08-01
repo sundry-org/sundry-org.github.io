@@ -75,8 +75,11 @@
 
 
 	<footer>
-		<p style="margin-top: 40px; font-size: 0.9em; color: #777;">&copy; 2025 Sundry</p>
+		<p style="margin-top: 40px; font-size: 0.9em; color: #777;">&copy; <span id="copyright-year"></span> Sundry</p>
 	</footer>
+	<script>
+		document.getElementById('copyright-year').textContent = new Date().getFullYear();
+	</script>
 </body>
 
 </html>
